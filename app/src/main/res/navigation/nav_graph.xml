@@ -14,13 +14,10 @@
             android:name="n"
             app:argType="string"
             app:nullable="true"
-            android:defaultValue="423"/>
+            android:defaultValue="42.8766:74.607:Bishkek"/>
         <action
             android:id="@+id/action_weatherFragment_to_selectCityFragment"
             app:destination="@id/selectCityFragment" />
-        <action
-            android:id="@+id/action_weatherFragment_to_listWeatherFragment"
-            app:destination="@id/listWeatherFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectCityFragment"
@@ -36,19 +33,5 @@
                 app:nullable="false" />
         </action>
 
-    </fragment>
-    <fragment
-        android:id="@+id/listWeatherFragment"
-        android:name="kg.geekteck.weatherapp.ui.savedlists.ListWeatherFragment"
-        android:label="fragment_list_weather"
-        tools:layout="@layout/fragment_list_weather" >
-        <action
-            android:id="@+id/action_listWeatherFragment_to_weatherFragment"
-            app:destination="@id/weatherFragment" >
-            <argument
-                android:name="n"
-                app:argType="string"
-                app:nullable="false" />
-        </action>
     </fragment>
 </navigation>
