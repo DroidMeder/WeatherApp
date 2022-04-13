@@ -1,6 +1,8 @@
 
 package kg.geekteck.weatherapp.data.models;
 
+import androidx.room.Ignore;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,6 +13,7 @@ public class Main {
     private double temp;
     @SerializedName("feels_like")
     @Expose
+    @Ignore
     private Double feelsLike;
     @SerializedName("temp_min")
     @Expose
@@ -26,9 +29,11 @@ public class Main {
     private Integer humidity;
     @SerializedName("sea_level")
     @Expose
+    @Ignore
     private Integer seaLevel;
     @SerializedName("grnd_level")
     @Expose
+    @Ignore
     private Integer grndLevel;
 
     public int getTemp() {

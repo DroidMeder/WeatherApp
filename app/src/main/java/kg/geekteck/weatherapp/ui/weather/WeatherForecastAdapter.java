@@ -51,7 +51,6 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
                 o +=8;
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -68,10 +67,10 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
     private List<kg.geekteck.weatherapp.data.models.forecast.List>
     corvertToList(List<ForecastWeather> data) {
         List<kg.geekteck.weatherapp.data.models.forecast.List> list = new ArrayList<>();
-        kg.geekteck.weatherapp.data.models.forecast.List lili = null;
-        List<Weather> weathers = null;
-        Weather weather = null;
-        Main main = null;
+        kg.geekteck.weatherapp.data.models.forecast.List lili;
+        List<Weather> weathers;
+        Weather weather;
+        Main main;
         for (int i = 0; i < data.size(); i++) {
             lili=new kg.geekteck.weatherapp.data.models.forecast.List();
             weathers=new ArrayList<>();

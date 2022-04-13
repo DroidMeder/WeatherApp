@@ -1,6 +1,8 @@
 
 package kg.geekteck.weatherapp.data.models;
 
+import androidx.room.Ignore;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,9 +13,11 @@ public class Wind {
     private Double speed;
     @SerializedName("deg")
     @Expose
+    @Ignore
     private Integer deg;
     @SerializedName("gust")
     @Expose
+    @Ignore
     private Double gust;
 
     public Double getSpeed() {

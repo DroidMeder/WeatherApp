@@ -15,8 +15,10 @@ import kg.geekteck.weatherapp.data.models.MainResponse;
 
 @Entity
 public class CurrentWeather implements Serializable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     int id;
+    @ColumnInfo(name = "createdAt")
+    long createdAt;
     @ColumnInfo(name = "lat")
     double lat;
     @ColumnInfo(name = "lon")
@@ -50,10 +52,20 @@ public class CurrentWeather implements Serializable {
     public CurrentWeather() {
     }
 
-    public CurrentWeather(double lat, double lon, long mainDate, String location, String iconUrl,
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public CurrentWeather(int id, long createdAt, double lat, double lon, long mainDate, String location, String iconUrl,
                           String isSkyClear, int temp, int maxTemp,
                           int minTemp, int humidity, int pressure, double wind,
                           long sunrise, long sunset) {
+        this.id = id;
+        this.createdAt=createdAt;
         this.lat = lat;
         this.lon = lon;
         this.mainDate = mainDate;
@@ -68,6 +80,7 @@ public class CurrentWeather implements Serializable {
         this.wind = wind;
         this.sunrise = sunrise;
         this.sunset = sunset;
+
     }
 
     @NonNull

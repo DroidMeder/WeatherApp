@@ -1,47 +1,63 @@
 
 package kg.geekteck.weatherapp.data.models;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import kg.geekteck.weatherapp.data.models.room.CurrentWeather;
+
+@Entity
 public class MainResponse {
+
+    @SerializedName("id")
+    @Expose
+    @PrimaryKey
+    private Integer id;
+    int createdAt;
 
     @SerializedName("coord")
     @Expose
+    @Embedded
     private Coord coord;
     @SerializedName("weather")
     @Expose
+    @Ignore
     private List<Weather> weather = null;
     @SerializedName("base")
     @Expose
     private String base;
     @SerializedName("main")
     @Expose
+    @Embedded
     private Main main;
     @SerializedName("visibility")
     @Expose
     private Integer visibility;
     @SerializedName("wind")
     @Expose
+    @Embedded
     private Wind wind;
     @SerializedName("clouds")
     @Expose
+    @Ignore
     private Clouds clouds;
     @SerializedName("dt")
     @Expose
     private int dt;
     @SerializedName("sys")
     @Expose
+
+    @Embedded
     private Sys sys;
     @SerializedName("timezone")
     @Expose
     private int timezone;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -129,7 +145,7 @@ public class MainResponse {
         this.timezone = timezone;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -153,4 +169,15 @@ public class MainResponse {
         this.cod = cod;
     }
 
+    public int getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(int createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    /* public static CurrentWeather toCurrentWeather() {
+
+    }*/
 }

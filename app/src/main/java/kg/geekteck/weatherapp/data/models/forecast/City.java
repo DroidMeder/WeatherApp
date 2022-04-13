@@ -8,7 +8,7 @@ public class City {
 
     @SerializedName("id")
     @Expose
-    private long id;
+    private int id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -31,11 +31,11 @@ public class City {
     @Expose
     private long sunset;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

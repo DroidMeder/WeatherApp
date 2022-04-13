@@ -24,22 +24,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public abstract class AppModule {
 
-    @Provides
+   /* @Provides
     @Singleton
     public static OkHttpClient provideOkHttpClient(){
-        return new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor()
-                        .setLevel(HttpLoggingInterceptor.Level.BODY))
-                .build();
+        return new OkHttpClient.Builder().build();
+                //.setLevel(HttpLoggingInterceptor.Level.BODY))
+               // .build();
+        //.addInterceptor(new HttpLoggingInterceptor()
     }
-
+*/
     @Provides
     @Singleton
-    public static Retrofit provideRetrofit(OkHttpClient client){
+    public static Retrofit provideRetrofit(){
         return  new Retrofit.Builder()
                 .baseUrl("https://api.openweathermap.org")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
                 .build();
     }
 
@@ -51,7 +50,25 @@ public abstract class AppModule {
 
     @Provides
     @Singleton
-    public static Repository provideApiRepository(WeatherAppApi api){
-        return new Repository(api);
+    public static AppDatabase provideDatabase(Application context){
+        return Room.databaseBuilder(context.getApplicationContext(),
+                AppDatabase.class, "weather")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    public static WeatherDao provideDoa(AppDatabase database){
+        System.out.println("3333 DM 3333"+database.newsDao().toString());
+        return database.newsDao();
+    }
+
+
+    @Provides
+    @Singleton
+    public static Repository provideApiRepository(WeatherAppApi api, WeatherDao dao){
+        return new Repository(api, dao);
     }
 }

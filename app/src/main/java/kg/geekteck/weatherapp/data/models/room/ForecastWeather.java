@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Entity
 public class ForecastWeather implements Serializable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     int id;
     @ColumnInfo(name = "lat")
     double lat;
@@ -34,7 +34,8 @@ public class ForecastWeather implements Serializable {
     public ForecastWeather() {
     }
 
-    public ForecastWeather(double lat, double lon, String iconUrl, long date, int maxTemp, int minTemp, long timeZone) {
+    public ForecastWeather(int id, double lat, double lon, String iconUrl, long date, int maxTemp, int minTemp, long timeZone) {
+        this.id=id;
         this.lat = lat;
         this.lon = lon;
         this.iconUrl = iconUrl;

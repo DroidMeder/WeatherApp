@@ -1,524 +1,534 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.weather.WeatherFragment">
-
-    <ImageView
-        android:id="@+id/iv_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_graphic_city_day"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:elevation="8dp"
-        android:background="@drawable/corner"
-        app:layout_constraintBottom_toBottomOf="@id/iv_background">
-
-        <LinearLayout
-            android:id="@+id/line"
-            android:layout_width="154dp"
+        android:orientation="vertical" >
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/corner1"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <TextView
-                android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:fontFamily="@font/barlow_medium"
-                android:lineHeight="19.2dp"
-                android:text="@string/mumbai_india"
-                android:textColor="@color/blue"
-                android:textFontWeight="500"
-                android:textSize="16sp" />
+            android:background="@color/white"
+            tools:context=".ui.weather.WeatherFragment">
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_places" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_day_date_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/barlow"
-            android:lineHeight="16.8dp"
-            android:text="@string/sunday_19_may_2019_4_30pm"
-            android:textColor="@color/light_gray"
-            android:textFontWeight="400"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/line"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/cl_weather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white">
-
-            <TableRow
+                android:id="@+id/iv_background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_graphic_city_day"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:elevation="8dp"
+                android:background="@drawable/corner"
+                app:layout_constraintBottom_toBottomOf="@id/iv_background">
 
                 <LinearLayout
-                    android:id="@+id/line_is_sky_clear"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/line"
+                    android:layout_width="154dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:id="@+id/iv_is_sky_clear"
-                        android:layout_width="40dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_horizontal"
-                        android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <TextView
-                        android:id="@+id/tv_is_sky_clear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="21.6dp"
-                        android:text="hiuh"
-                        android:textColor="@color/black"
-                        android:textFontWeight="500"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/line_temperature"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:background="@drawable/corner1"
+                    android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal"
-                    android:visibility="visible">
-
-
-                    <TextView
-                        android:id="@+id/tv_temperature1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/barlow_light"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="76.8dp"
-                        android:text="@string/_33"
-                        android:textColor="@color/black"
-                        android:textFontWeight="300"
-                        android:textSize="64sp" />
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
-                        android:id="@+id/tv_temperature2"
+                        android:id="@+id/tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:clickable="true"
                         android:fontFamily="@font/barlow_medium"
-                        android:lineHeight="28.8dp"
-                        android:text="@string/c"
-                        android:textColor="@color/gray"
-                        android:textFontWeight="500"
-                        android:textSize="24sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/line_temp_variation"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="15dp"
-                    android:visibility="visible">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_max_temp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/barlow_light"
-                            android:lineHeight="19.2dp"
-                            android:text="@string/_35_u00b0c"
-                            android:textColor="@color/gray"
-                            android:textFontWeight="300"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_max_temp"
-                            android:layout_width="5dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_up" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_min_temp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/barlow_light"
-                            android:lineHeight="19.2dp"
-                            android:text="@string/_35_u00b0c"
-                            android:textColor="@color/gray"
-                            android:textFontWeight="300"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_min_temp"
-                            android:layout_width="5dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_down" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/line_humidity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_humidity" />
-
-                    <TextView
-                        android:id="@+id/tv_humidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
                         android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
+                        android:text="@string/mumbai_india"
+                        android:textColor="@color/blue"
                         android:textFontWeight="500"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/humidity"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/line_barometer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
                     <ImageView
+                        android:id="@+id/imageView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_barometr" />
-
-                    <TextView
-                        android:id="@+id/tv_barometer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
-                        android:textFontWeight="500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/pressure"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_places" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/line_wind"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_wind_1" />
-
-                    <TextView
-                        android:id="@+id/tv_wind"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
-                        android:textFontWeight="500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/wind"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/line_sunrise"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_sunrise" />
-
-                    <TextView
-                        android:id="@+id/tv_sunrise"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
-                        android:textFontWeight="500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/sunrise"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/line_sunset"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_sunset" />
-
-                    <TextView
-                        android:id="@+id/tv_sunset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
-                        android:textFontWeight="500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/sunset"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/line_daytime"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_day_time" />
-
-                    <TextView
-                        android:id="@+id/tv_daytime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="-0.05"
-                        android:lineHeight="19.2dp"
-                        android:text="@string/_35_u00b0c"
-                        android:textColor="@color/dark_gray"
-                        android:textFontWeight="500"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/barlow_medium"
-                        android:letterSpacing="0.1"
-                        android:lineHeight="9.6dp"
-                        android:text="@string/daytime"
-                        android:textColor="@color/light_gray"
-                        android:textFontWeight="500"
-                        android:textSize="8sp" />
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <LinearLayout
-                android:id="@+id/line_rec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recForecast"
+                <TextView
+                    android:id="@+id/tv_day_date_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_cities" />
+                    android:fontFamily="@font/barlow"
+                    android:lineHeight="16.8dp"
+                    android:text="@string/sunday_19_may_2019_4_30pm"
+                    android:textColor="@color/light_gray"
+                    android:textFontWeight="400"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/cl_weather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/line_is_sky_clear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:id="@+id/iv_is_sky_clear"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_horizontal"
+                                android:scaleType="centerCrop"
+                                tools:srcCompat="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/tv_is_sky_clear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="21.6dp"
+                                android:text="hiuh"
+                                android:textColor="@color/black"
+                                android:textFontWeight="500"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_temperature"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+
+                            <TextView
+                                android:id="@+id/tv_temperature1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/barlow_light"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="76.8dp"
+                                android:text="@string/_33"
+                                android:textColor="@color/black"
+                                android:textFontWeight="300"
+                                android:textSize="64sp" />
+
+                            <TextView
+                                android:id="@+id/tv_temperature2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="6dp"
+                                android:fontFamily="@font/barlow_medium"
+                                android:lineHeight="28.8dp"
+                                android:text="@string/c"
+                                android:textColor="@color/gray"
+                                android:textFontWeight="500"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_temp_variation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="15dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_max_temp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/barlow_light"
+                                    android:lineHeight="19.2dp"
+                                    android:text="@string/_35_u00b0c"
+                                    android:textColor="@color/gray"
+                                    android:textFontWeight="300"
+                                    android:textSize="16sp" />
+
+                                <ImageView
+                                    android:id="@+id/iv_max_temp"
+                                    android:layout_width="5dp"
+                                    android:layout_height="8dp"
+                                    android:src="@drawable/ic_up" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_min_temp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/barlow_light"
+                                    android:lineHeight="19.2dp"
+                                    android:text="@string/_35_u00b0c"
+                                    android:textColor="@color/gray"
+                                    android:textFontWeight="300"
+                                    android:textSize="16sp" />
+
+                                <ImageView
+                                    android:id="@+id/iv_min_temp"
+                                    android:layout_width="5dp"
+                                    android:layout_height="8dp"
+                                    android:src="@drawable/ic_down" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/line_humidity"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_humidity" />
+
+                            <TextView
+                                android:id="@+id/tv_humidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/humidity"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_barometer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_barometr" />
+
+                            <TextView
+                                android:id="@+id/tv_barometer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/pressure"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_wind"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_wind_1" />
+
+                            <TextView
+                                android:id="@+id/tv_wind"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/wind"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/line_sunrise"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_sunrise" />
+
+                            <TextView
+                                android:id="@+id/tv_sunrise"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/sunrise"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_sunset"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_sunset" />
+
+                            <TextView
+                                android:id="@+id/tv_sunset"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/sunset"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/line_daytime"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                app:srcCompat="@drawable/ic_day_time" />
+
+                            <TextView
+                                android:id="@+id/tv_daytime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="-0.05"
+                                android:lineHeight="19.2dp"
+                                android:text="@string/_35_u00b0c"
+                                android:textColor="@color/dark_gray"
+                                android:textFontWeight="500"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/barlow_medium"
+                                android:letterSpacing="0.1"
+                                android:lineHeight="9.6dp"
+                                android:text="@string/daytime"
+                                android:textColor="@color/light_gray"
+                                android:textFontWeight="500"
+                                android:textSize="8sp" />
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <LinearLayout
+                        android:id="@+id/line_rec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recForecast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_cities" />
+
+                    </LinearLayout>
+
+                </TableLayout>
 
             </LinearLayout>
 
-        </TableLayout>
-
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

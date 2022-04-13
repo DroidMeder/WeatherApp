@@ -1,36 +1,31 @@
 package kg.geekteck.weatherapp.ui.cityselect;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
+import android.widget.Toast;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.List;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import kg.geekteck.weatherapp.ConnectionDetector;
+import kg.geekteck.weatherapp.R;
 import kg.geekteck.weatherapp.base.BaseFragment;
-import kg.geekteck.weatherapp.common.OnItemClick;
-import kg.geekteck.weatherapp.common.Resource;
-import kg.geekteck.weatherapp.data.models.citynames.MyResponse;
-import kg.geekteck.weatherapp.data.models.room.CityName;
 import kg.geekteck.weatherapp.databinding.FragmentSelectCityBinding;
 
 @AndroidEntryPoint
-public class SelectCityFragment extends BaseFragment<FragmentSelectCityBinding> implements
-        OnItemClick<String> {
-    private String city;
-    private String s1;
-    private ConnectionDetector cd;
-    private boolean isNetwork = false;
-    private SelectCityAdapter adapter;
-    private SelectCityViewModel model;
+public class SelectCityFragment extends BaseFragment<FragmentSelectCityBinding>implements OnMapReadyCallback {
+    private GoogleMap gMap;
+    private SupportMapFragment supportMapFragment;
+
 
     public SelectCityFragment() {
         // Required empty public constructor
@@ -39,237 +34,117 @@ public class SelectCityFragment extends BaseFragment<FragmentSelectCityBinding> 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cd = new ConnectionDetector(requireContext().getApplicationContext());
-        adapter = new SelectCityAdapter();
-        adapter.setItemClick(this);
-        model = new ViewModelProvider(requireActivity()).get(SelectCityViewModel.class);
+        System.out.println("___________onCreate");
+
     }
 
     @Override
     protected FragmentSelectCityBinding bind() {
+        System.out.println("___________bind");
+
         return FragmentSelectCityBinding.inflate(getLayoutInflater());
     }
 
+    //region base methods
     @Override
     protected void setupViews() {
-        isNetwork = cd.ConnectingToInternet();
-        if (isNetwork) {
-            System.out.println("iiieeess");
-        } else {
-            System.out.println("nnnnnooooou");
+        System.out.println("___________SetupViews");
+        FragmentManager fm =getChildFragmentManager();/// getChildFragmentManager();
+        supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.google_map);
+        if (supportMapFragment == null) {
+            System.out.println("___________SetupViews1");
+
+            supportMapFragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.google_map, supportMapFragment).commit();
         }
-        binding.rec.setAdapter(adapter);
+        supportMapFragment.getMapAsync(this);
     }
-
     @Override
-    protected void setupListener() {
-    }
-
+    protected void setupListener() {}
     @Override
-    protected void callRequests() {
-        isNetwork = cd.ConnectingToInternet();
-        System.out.println(".......SLF......" + city);
-        if (isNetwork) {
-            model.getCitiesName(city);
-        } else {
-            model.getLocalCitiesName(city);
-        }
-    }
-
+    protected void callRequests() {}
     @Override
-    protected void setupObserver() {
-        binding.etCityName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    protected void setupObserver() {}
+    //endregion
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                binding.button.setVisibility(View.VISIBLE);
-                binding.tvSimple.setVisibility(View.GONE);
-                adapter.clearList();
-            }
+    private void setupMapListener() {
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                city = editable.toString();
-            }
-        });
-        binding.button.setOnClickListener(view -> {
-            isNetwork = cd.ConnectingToInternet();
-            s1 = binding.etCityName.getText().toString();
-            if (s1 != null) {
-                if (isNetwork) {
-                    model.getCitiesName(s1);
-                    setupObserver();
-                } else {
-                    model.getLocalCitiesName(s1);
-                    model.liveData2.observe(getViewLifecycleOwner(), new Observer<Resource<List<CityName>>>() {
-                        @Override
-                        public void onChanged(Resource<List<CityName>> listResource) {
-                            System.out.println("---SLF--------8888888888888 " + listResource.data);
-                            switch (listResource.status) {
-                                case SUCCESS: {
-                                    if (listResource.data.size() > 0) {
-                                        adapter.setListOfCity(listResource.data);
-                                    }
-
-                                    System.out.println("Success----SLF-------77766---"
-                                            + listResource.data.size());
-                                    System.out.println("[[[[" + listResource.msc + "888888SLF88888");
-                                    break;
-                                }
-                                case ERROR: {
-                                    System.out.println("==SLF==7666==" + listResource.msc);
-                                    Snackbar.make(binding.getRoot(), listResource.msc,
-                                            BaseTransientBottomBar.LENGTH_LONG)
-                                            .show();
-
-                                    break;
-                                }
-                                case LOADING: {
-                                    System.out.println("loading==56655=SLF==" + listResource.msc);
-                                    Snackbar.make(binding.getRoot(), "loading===SLF==",
-                                            BaseTransientBottomBar.LENGTH_LONG)
-                                            .show();
-                                    break;
-                                }
-                            }
-                        }
-                    });
-                }
-                //model.getLocalCitiesName(s1);
-                binding.button.setVisibility(View.GONE);
-                binding.tvSimple.setFocusable(true);
-                binding.tvSimple.setVisibility(View.VISIBLE);
-            }
-        });
-        //city response
-        if (model.liveData!=null) {
-            model.liveData.observe(getViewLifecycleOwner(), new Observer<Resource<MyResponse>>() {
+        if (gMap!=null){
+            System.out.println("___________setupMapListener");
+            gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
-                public void onChanged(Resource<MyResponse> mainResponseResource) {
-                    switch (mainResponseResource.status) {
-                        case SUCCESS: {
-                            //model.getLocalCitiesName();
-                            System.out.println("*********start2***********");
-
-                            System.out.println("lat=="+mainResponseResource.data.getLat());
-                            System.out.println("lon=="+ mainResponseResource.data.getLon());
-                            System.out.println("***********end2***********");
-                            CityName cityName = null;
-                            try {
-                                cityName = new CityName(mainResponseResource.data.getLat(),
-                                        mainResponseResource.data.getLon(), mainResponseResource.data.getName(),
-                                        s1,
-                                        mainResponseResource.data.getCountry(), mainResponseResource.data.getState(),
-                                        mainResponseResource.data.getLocalNames().getFeatureName(),
-                                        mainResponseResource.data.getLocalNames().getEn(),
-                                        mainResponseResource.data.getLocalNames().getKy(),
-                                        mainResponseResource.data.getLocalNames().getRu());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("city---SLF----" + cityName.getName());
-                            if (isNetwork) {
-                                model.setLocalCitiesName(cityName);
-                            }
-                            adapter.setLisOfCity(mainResponseResource.data);
-                            System.out.println("Success------SLF--------");
-                            break;
-                        }
-                        case ERROR: {
-                            System.out.println("==SLF====" + mainResponseResource.msc);
-                            isNetwork = cd.ConnectingToInternet();
-                            if (!isNetwork) {
-                                model.getLocalCitiesName(s1);
-                                model.liveData2.observe(getViewLifecycleOwner(), listResource -> {
-                                    System.out.println("---SLF--------8888888888888 " + listResource.data);
-                                    switch (listResource.status) {
-                                        case SUCCESS: {
-                                            if (listResource.data.size() > 0) {
-                                                adapter.setListOfCity(listResource.data);
-                                            }
-
-                                            System.out.println("Success----SLF-------77766---"
-                                                    + listResource.data.size());
-                                            System.out.println("[[[[" + listResource.msc + "888888SLF88888");
-                                            break;
-                                        }
-                                        case ERROR: {
-                                            System.out.println("==SLF==7666==" + listResource.msc);
-                                            Snackbar.make(binding.getRoot(), listResource.msc,
-                                                    BaseTransientBottomBar.LENGTH_LONG)
-                                                    .show();
-
-                                            break;
-                                        }
-                                        case LOADING: {
-                                            System.out.println("loading==56655=SLF==" + listResource.msc);
-                                            Snackbar.make(binding.getRoot(), "loading===SLF==",
-                                                    BaseTransientBottomBar.LENGTH_LONG)
-                                                    .show();
-                                            break;
-                                        }
-                                    }
-                                });
-                            } else {
-                                Snackbar.make(binding.getRoot(), mainResponseResource.msc,
-                                        BaseTransientBottomBar.LENGTH_LONG)
-                                        .show();
-                            }
-                            break;
-                        }
-                        case LOADING: {
-                            System.out.println("loading==SLF===" + mainResponseResource.msc);
-                            Snackbar.make(binding.getRoot(), "loading=====",
-                                    BaseTransientBottomBar.LENGTH_LONG)
-                                    .show();
-                            break;
-                        }
-                    }
+                public void onMapClick(@NonNull LatLng latLng) {
+                    System.out.println("___click________setupMapListener");
+                    MarkerOptions marker = new MarkerOptions();
+                    marker.position(latLng);
+                    marker.draggable(true);
+                    gMap.clear();
+                    gMap.animateCamera(animateMapCamera(latLng));
+                    gMap.addMarker(marker);
+                    Toast.makeText(requireActivity(), "onMapClick", Toast.LENGTH_SHORT).show();
                 }
             });
-        } else {
-            model.getLocalCitiesName(s1);
-            model.liveData2.observe(getViewLifecycleOwner(), listResource -> {
-                System.out.println("---SLF--------8888888888888 " + listResource.data);
-                switch (listResource.status) {
-                    case SUCCESS: {
-                        if (listResource.data.size() > 0) {
-                            adapter.setListOfCity(listResource.data);
-                        }
+            gMap.setBuildingsEnabled(true);
+            gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    marker.setTitle("Coordinates "+marker.getPosition());
+                    marker.showInfoWindow();
+                    return false;
+                }
+            });
+            gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(@NonNull Marker marker) {
+                    System.out.println("===== lat "+marker.getPosition().latitude);
+                    System.out.println("===== lon "+marker.getPosition().longitude);
+                    String data = marker.getPosition().latitude+":"
+                            +marker.getPosition().longitude;
+                    navController.navigate(SelectCityFragmentDirections
+                            .actionSelectCityFragmentToWeatherFragment(data));
+                }
+            });
+            gMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                @Override
+                public void onMarkerDrag(@NonNull Marker marker) {
+                    marker.setTitle("Coordinates "+marker.getPosition());
+                    marker.showInfoWindow();
+                }
 
-                        System.out.println("Success----SLF-------77766---"
-                                + listResource.data.size());
-                        System.out.println("[[[[" + listResource.msc + "888888SLF88888");
-                        break;
-                    }
-                    case ERROR: {
-                        System.out.println("==SLF==7666==" + listResource.msc);
-                        Snackbar.make(binding.getRoot(), listResource.msc,
-                                BaseTransientBottomBar.LENGTH_LONG)
-                                .show();
+                @Override
+                public void onMarkerDragEnd(@NonNull Marker marker) {
+                    marker.setTitle("Coordinates "+marker.getPosition());
+                    marker.showInfoWindow();
+                    Toast.makeText(requireActivity(), "onMarkerDragEnd "
+                            +marker.getPosition(), Toast.LENGTH_SHORT).show();
+                }
 
-                        break;
-                    }
-                    case LOADING: {
-                        System.out.println("loading==56655=SLF==" + listResource.msc);
-                        Snackbar.make(binding.getRoot(), "loading===SLF==",
-                                BaseTransientBottomBar.LENGTH_LONG)
-                                .show();
-                        break;
-                    }
+                @Override
+                public void onMarkerDragStart(@NonNull Marker marker) {
+
                 }
             });
         }
     }
 
+    private CameraUpdate animateMapCamera(
+            LatLng latLng
+    ){
+        return CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(latLng)
+                        .zoom((float) 5.0)
+                        .bearing((float) 45.0)
+                        .tilt((float) 60.0)
+                        .build()
+        );
+    }
+
     @Override
-    public void buttonClick(String data) {
-        System.out.println("[[[[[SLF[[[[" + data);
-        navController.navigate(SelectCityFragmentDirections
-                .actionSelectCityFragmentToWeatherFragment(data));
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        System.out.println("__________onMapReady");
+        gMap = googleMap;
+        setupMapListener();
     }
 }
