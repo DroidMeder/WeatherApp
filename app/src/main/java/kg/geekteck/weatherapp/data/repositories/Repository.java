@@ -70,7 +70,7 @@ public class Repository {
                     liveData.setValue(Resource.success(response.body()));
                 }else {
                     liveData.setValue(Resource.error(response.message(), null));
-                }
+                }//
             }
             @Override
             public void onFailure(@NonNull Call<ForecastResponse> call, @NonNull Throwable t) {
